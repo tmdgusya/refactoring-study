@@ -1,6 +1,4 @@
 export function statement(invoice, plays) {
-    let totalAmount = 0;
-    let volumeCredits = 0;
     let result = `청구내역 = ${invoice.customer} \n`;
 
     const format = new Intl.NumberFormat("en-US", {
@@ -35,20 +33,38 @@ export function statement(invoice, plays) {
         return result;
     };
 
+    const volumeCreditsFor = (aPerformance) => {
+        let result = 0;
+        result += Math.max(aPerformance.audience - 30, 0);
+        if (playFor(aPerformance).type === "comedy")
+            result += Math.floor(aPerformance.audience / 5);
+
+        return result;
+    };
+
+    const totalVolumeCredits = () => {
+        let volumeCredits = 0;
+        for (let pref of invoice.performances) {
+            volumeCredits += volumeCreditsFor(pref);
+        }
+        return volumeCredits;
+    };
+
+    const totalAmount = () => {
+        let result = 0;
+        for (let pref of invoice.performances) {
+            result += amountFor(pref);
+        }
+        return result;
+    };
+
     for (let pref of invoice.performances) {
-        // 포인트 적립해주고
-        volumeCredits += Math.max(pref.audience - 30, 0);
-
-        // 코미티 관객 5명마다 포인트 제공해주고
-        if (playFor(pref).type === "comedy") volumeCredits += Math.floor(pref.audience / 5);
-
         // 청구 내역 출력
         result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)}: ${pref.audience}석 \n`;
-        totalAmount += amountFor(pref);
     }
 
-    result += `총액 : ${format(totalAmount / 100)}\n`;
-    result += `적립 포인트 : ${volumeCredits}점\n`;
+    result += `총액 : ${format(totalAmount() / 100)}\n`;
+    result += `적립 포인트 : ${totalVolumeCredits()}점\n`;
 
     return result;
 }
