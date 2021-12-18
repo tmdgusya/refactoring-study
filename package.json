@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "compile": "npx tsc",
+    "ch-01": "npx tsc && npx ts-node src/chapter01/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^17.0.0",
+    "cross-fetch": "^3.1.4",
+    "node-fetch": "^3.1.0",
     "tsc": "^2.0.3",
     "typescript": "^4.5.4"
   }
