@@ -25,25 +25,25 @@ interface ScreenInfo {
 
 /**
  * 가격을 계산하는 함수 추출(Extract)
- * @param perf
+ * @param aPerformance
  * @param play
  */
-function amountFor(perf: ScreenInfo, play: MovieInfo) {
+function amountFor(aPerformance: ScreenInfo, play: MovieInfo) {
     let thisAmount = 0;
 
     switch (play.type) {
         case "tragedy":
             thisAmount = 40000;
-            if (perf.audience > 30) {
-                thisAmount += 1000 * (perf.audience - 30);
+            if (aPerformance.audience > 30) {
+                thisAmount += 1000 * (aPerformance.audience - 30);
             }
             break;
         case "comedy":
             thisAmount = 30000;
-            if (perf.audience > 20) {
-                thisAmount += 10000 + 500 * (perf.audience - 20);
+            if (aPerformance.audience > 20) {
+                thisAmount += 10000 + 500 * (aPerformance.audience - 20);
             }
-            thisAmount += 300 * perf.audience;
+            thisAmount += 300 * aPerformance.audience;
             break;
         default:
             throw new Error(`알 수 없는 장르 : ${play.type}`);
