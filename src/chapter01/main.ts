@@ -23,6 +23,35 @@ interface ScreenInfo {
     audience: number
 }
 
+/**
+ * 가격을 계산하는 함수 추출(Extract)
+ * @param perf
+ * @param play
+ */
+function amountFor(perf: ScreenInfo, play: MovieInfo) {
+    let thisAmount = 0;
+
+    switch (play.type) {
+        case "tragedy":
+            thisAmount = 40000;
+            if (perf.audience > 30) {
+                thisAmount += 1000 * (perf.audience - 30);
+            }
+            break;
+        case "comedy":
+            thisAmount = 30000;
+            if (perf.audience > 20) {
+                thisAmount += 10000 + 500 * (perf.audience - 20);
+            }
+            thisAmount += 300 * perf.audience;
+            break;
+        default:
+            throw new Error(`알 수 없는 장르 : ${play.type}`);
+    }
+
+    return thisAmount;
+}
+
 export function statement(plays: StaticMovie, invoiceList: Screening) {
     let totalAmount = 0;
     let volumeCredits = 0;
@@ -36,25 +65,7 @@ export function statement(plays: StaticMovie, invoiceList: Screening) {
 
     for (let perf of invoiceList.performances) {
         const play = (plays as any)[perf.playID];
-        let thisAmount = 0;
-
-        switch (play.type) {
-            case "tragedy":
-                thisAmount = 40000;
-                if (perf.audience > 30) {
-                    thisAmount += 1000 * (perf.audience - 30);
-                }
-                break;
-            case "comedy":
-                thisAmount = 30000;
-                if (perf.audience > 20) {
-                    thisAmount += 10000 + 500 * (perf.audience - 20);
-                }
-                thisAmount += 300 * perf.audience;
-                break;
-            default:
-                throw new Error(`알 수 없는 장르 : ${play.type}`);
-        }
+        let thisAmount = amountFor(perf, play);
 
         //포인트를 적립한다.
         volumeCredits += Math.max(perf.audience - 30, 0);
