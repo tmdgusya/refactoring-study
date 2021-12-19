@@ -4,7 +4,7 @@ const ABSOLUTE_PATH = './src/chapter01/'
 const INVOICES_JSON_PATH = ABSOLUTE_PATH + 'invoices.json'
 const PLAYS_JSON = ABSOLUTE_PATH + 'plays.json'
 
-interface StaticMovie {
+export interface StaticMovie {
     movieName: MovieInfo,
 }
 
@@ -13,7 +13,7 @@ interface MovieInfo {
     type : string
 }
 
-interface Screening {
+export interface Screening {
     customer: string
     performances: ScreenInfo[]
 }
@@ -23,7 +23,7 @@ interface ScreenInfo {
     audience: number
 }
 
-function statement(plays: StaticMovie, invoiceList: Screening) {
+export function statement(plays: StaticMovie, invoiceList: Screening) {
     let totalAmount = 0;
     let volumeCredits = 0;
     let result = `청구 내역 (고객명: ${invoiceList.customer}\n`
