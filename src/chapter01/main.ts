@@ -35,12 +35,7 @@ export function statement(plays: StaticMovie, invoiceList: Screening) : string {
     }).format;
 
     for (let perf of invoiceList.performances) {
-        //포인트를 적립한다.
-        volumeCredits += Math.max(perf.audience - 30, 0);
-        // 희극 관객 3명마다 추가 포인트를 제공한다.
-        if ("comedy" === playFor(perf).type) {
-            volumeCredits += Math.floor(perf.audience / 5);
-        }
+        volumeCredits += volumeCreditFor(perf);
 
         //청구 내역을 출력한다.
         result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} 석)\n`;
@@ -86,6 +81,23 @@ export function statement(plays: StaticMovie, invoiceList: Screening) : string {
      */
     function playFor(aPerformance: ScreenInfo) : MovieInfo {
         return (plays as any)[aPerformance.playID];
+    }
+
+    /**
+     * Performance 에 따른 가격을 계산해주는 함수
+     * @param aPerformance
+     */
+    function volumeCreditFor(aPerformance: ScreenInfo) {
+        let volumeCredits = 0;
+
+        //포인트를 적립한다.
+        volumeCredits += Math.max(aPerformance.audience - 30, 0);
+        // 희극 관객 3명마다 추가 포인트를 제공한다.
+        if ("comedy" === playFor(aPerformance).type) {
+            volumeCredits += Math.floor(aPerformance.audience / 5);
+        }
+
+        return volumeCredits;
     }
 }
 
