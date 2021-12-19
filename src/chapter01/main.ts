@@ -102,7 +102,7 @@ export function statement(plays: StaticMovie, invoiceList: Screening) : string {
 }
 
 
-function excute() {
+function execute() {
     const invoiceJsonFile = readJson<Screening[]>(INVOICES_JSON_PATH);
     const playJsonFile = readJson<StaticMovie>(PLAYS_JSON);
 
@@ -110,4 +110,4 @@ function excute() {
     console.log(result);
 }
 
-excute()
+execute();
