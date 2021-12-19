@@ -87,7 +87,7 @@ export function statement(plays: StaticMovie, invoiceList: Screening) : string {
      * Performance 에 따른 가격을 계산해주는 함수
      * @param aPerformance
      */
-    function volumeCreditFor(aPerformance: ScreenInfo) {
+    function volumeCreditFor(aPerformance: ScreenInfo): number {
         let volumeCredits = 0;
 
         //포인트를 적립한다.
