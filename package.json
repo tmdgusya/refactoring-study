@@ -1,0 +1,21 @@
+{
+  "name": "refactoring-study",
+  "version": "1.0.0",
+  "description": "## 시간",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:ch01": "node src/chapter01"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eamon3481/refactoring-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eamon3481/refactoring-study/issues"
+  },
+  "homepage": "https://github.com/eamon3481/refactoring-study#readme"
+}
