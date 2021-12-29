@@ -1,8 +1,27 @@
 
 export function statement(invoice, plays) {
     let totalAmount = 0;
-    let volumeCredits = 0;
     let result = `청구내역 = ${invoice.customer} \n`;
+//반복문 쪼개기
+    for (let pref of invoice.performances) {
+        result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)}: ${pref.audience}석 \n`;
+        totalAmount += amountFor(pref);
+    }
+    
+    result += `총액 : ${format(totalAmount / 100)}\n`;
+    result += `적립 포인트 : ${totalVolumeCredits()}점\n`;
+    return result;
+
+
+
+    
+    function totalVolumeCredits() {
+        let volumeCredits = 0;
+        for (let perf of invoice.performances) {
+            volumeCredits += volumeCreditsFor(perf);
+        }
+        return volumeCredits
+    }
 
     function format(aNumber){
         return new Intl.NumberFormat("en-US", {
@@ -26,7 +45,7 @@ export function statement(invoice, plays) {
         return volumeCredits
     }
 
-    const amountFor = (aPerformance) => {
+    function amountFor  (aPerformance) {
         //  명확한 변수로 변경하기
         // 역활이 뚜렷하지 않을때는 a/ an 을 붙인다
         let result = 0;
@@ -53,18 +72,5 @@ export function statement(invoice, plays) {
         return result
 }
 
- 
 
-    for (let pref of invoice.performances) {
-
-    volumeCredits += volumeCreditsFor(pref);
-        // 청구 내역 출력
-        result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)}: ${pref.audience}석 \n`;
-        totalAmount += amountFor(pref);
-    }
-
-    result += `총액 : ${format(totalAmount / 100)}\n`;
-    result += `적립 포인트 : ${volumeCredits}점\n`;
-
-    return result;
 }
