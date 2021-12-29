@@ -4,6 +4,14 @@ export function statement(invoice, plays) {
     let volumeCredits = 0;
     let result = `청구내역 = ${invoice.customer} \n`;
 
+    function format(aNumber){
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+        }).format(aNumber);
+    }
+
     function playFor(aPerformance) {
         return plays[aPerformance.playID];
     }
@@ -45,11 +53,7 @@ export function statement(invoice, plays) {
         return result
 }
 
-    const format = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 2,
-    }).format;
+ 
 
     for (let pref of invoice.performances) {
 
