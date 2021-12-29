@@ -9,6 +9,15 @@ export function statement(invoice, plays) {
     }
 
 
+    function volumeCreditsFor(pref){
+        let volumeCredits = 0;
+           // 포인트 적립해주고
+           volumeCredits += Math.max(pref.audience - 30, 0);
+                // 코미티 관객 5명마다 포인트 제공해주고
+        if (playFor(pref).type === "comedy") volumeCredits += Math.floor(pref.audience / 5);
+        return volumeCredits
+    }
+
     const amountFor = (aPerformance) => {
         //  명확한 변수로 변경하기
         // 역활이 뚜렷하지 않을때는 a/ an 을 붙인다
@@ -44,18 +53,10 @@ export function statement(invoice, plays) {
 
     for (let pref of invoice.performances) {
 
-        
-       let thisAmount = amountFor(pref) // 변수 인라인하기
-
-        // 포인트 적립해주고
-        volumeCredits += Math.max(pref.audience - 30, 0);
-
-        // 코미티 관객 5명마다 포인트 제공해주고
-        if (playFor(pref).type === "comedy") volumeCredits += Math.floor(pref.audience / 5);
-
+    volumeCredits += volumeCreditsFor(pref);
         // 청구 내역 출력
-        result += `${playFor(pref).name}: ${format(thisAmount / 100)}: ${pref.audience}석 \n`;
-        totalAmount += thisAmount;
+        result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)}: ${pref.audience}석 \n`;
+        totalAmount += amountFor(pref);
     }
 
     result += `총액 : ${format(totalAmount / 100)}\n`;
