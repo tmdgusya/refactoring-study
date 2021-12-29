@@ -1,8 +1,16 @@
 
 export function statement(invoice, plays) {
-    let result = `청구내역 (고객명 : ${invoice.customer}) \n`;
+    const statementData = {};
+    statementData.customer = invoice.customer;
+    statementData.performances = invoice.performances;
+   return renderPlainText(statementData,plays)
+
+}
+
+function renderPlainText (data ,plays){
+let result = `청구내역 (고객명 : ${data.customer}) \n`;
 //반복문 쪼개기
-    for (let pref of invoice.performances) {
+    for (let pref of data.performances) {
         result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)}: ${pref.audience}석 \n`;
     }
 
@@ -13,7 +21,7 @@ export function statement(invoice, plays) {
 
 function appleSauce() {
     let totalAmount = 0; 
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
     totalAmount += amountFor(perf);
     }
     return totalAmount
@@ -21,7 +29,7 @@ function appleSauce() {
     
     function totalVolumeCredits() {
         let volumeCredits = 0;
-        for (let perf of invoice.performances) {
+        for (let perf of data.performances) {
             volumeCredits += volumeCreditsFor(perf);
         }
         return volumeCredits
@@ -75,6 +83,4 @@ function appleSauce() {
         }
         return result
 }
-
-
 }
