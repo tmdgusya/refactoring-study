@@ -1,19 +1,23 @@
 
 export function statement(invoice, plays) {
-    let totalAmount = 0;
-    let result = `청구내역 = ${invoice.customer} \n`;
+    let result = `청구내역 (고객명 : ${invoice.customer}) \n`;
 //반복문 쪼개기
     for (let pref of invoice.performances) {
         result += `${playFor(pref).name}: ${format(amountFor(pref) / 100)}: ${pref.audience}석 \n`;
-        totalAmount += amountFor(pref);
     }
-    
-    result += `총액 : ${format(totalAmount / 100)}\n`;
+
+    result += `총액 : ${format(appleSauce() / 100)}\n`;
     result += `적립 포인트 : ${totalVolumeCredits()}점\n`;
     return result;
 
 
-
+function appleSauce() {
+    let totalAmount = 0; 
+    for (let perf of invoice.performances) {
+    totalAmount += amountFor(perf);
+    }
+    return totalAmount
+}
     
     function totalVolumeCredits() {
         let volumeCredits = 0;
