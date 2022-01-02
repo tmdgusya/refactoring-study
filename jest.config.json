@@ -1,5 +1,4 @@
 {
-    "collectCoverage": true,
     "moduleFileExtensions": ["js", "mjs"],
     "transform": {
         "^.+\\.js$": "babel-jest",

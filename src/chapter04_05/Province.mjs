@@ -37,6 +37,10 @@ export class Province {
         return this._demand;
     }
 
+    set demand(arg) {
+        return (this._demand = arg);
+    }
+
     get price() {
         return this._price;
     }
