@@ -34,4 +34,44 @@ describe("province", () => {
         expect(asia.shortfall).toBe(-6);
         expect(asia.profit).toBe(292)
     })
+
+    it("zero demand", () => {
+        asia._demand = 0;
+        expect(asia.shortfall).toBe(-25);
+        expect(asia.profit).toBe(0);
+    });
+
+    it("negative demand", () => {
+        asia._demand = -1;
+        expect(asia.shortfall).toBe(-26);
+        expect(asia.profit).toBe(-10);
+    });
+
+    it("empty string demand", () => {
+        asia._demand = "";
+        expect(asia.shortfall).toBe(NaN);
+        expect(asia.profit).toBe(NaN);
+    });
+});
+
+
+describe("no producers", () => {
+    let noProducers;
+    beforeEach(() => {
+        const data = {
+            name: "No producers",
+            producers: [],
+            demand: 30,
+            price: 20,
+        };
+        noProducers = new Province(data);
+    });
+
+    it("shortfall", () => {
+        expect(noProducers.shortfall).toBe(30);
+    });
+
+    it("profit", () => {
+        expect(noProducers.profit).toBe(0);
+    });
 });
