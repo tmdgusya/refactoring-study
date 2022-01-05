@@ -16,8 +16,16 @@ function sampleProvinceData() {
 }
 
 describe("province", () => {
+    let asia;
+    beforeEach(() => {
+        asia = new Province(sampleProvinceData());
+    });
+
     test("shortfall", () => {
-        const asia = new Province(sampleProvinceData());
         expect(asia.shortfall).toBe(5);
     });
+
+    it('profit',function(){
+        expect(asia.profit).toBe(230)
+    })
 });
