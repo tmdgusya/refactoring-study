@@ -1,21 +1,21 @@
 {
   "name": "refactoring-study",
-  "version": "1.0.0",
-  "description": "## 시간",
-  "type": "module",
-  "main": "index.js",
+  "packageManager": "yarn@3.1.1",
   "scripts": {
-    "start": "node index.js",
-    "start:ch01": "node src/chapter01"
+    "test": "jest",
+    "compile": "npx tsc",
+    "ch-01": "npx tsc && npx ts-node src/chapter01/index.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eamon3481/refactoring-study.git"
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@types/jest": "^27.4.0",
+    "babel-jest": "^27.4.6",
+    "jest": "^27.4.6",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/eamon3481/refactoring-study/issues"
-  },
-  "homepage": "https://github.com/eamon3481/refactoring-study#readme"
+  "dependencies": {
+    "ts-node": "^10.4.0"
+  }
 }
