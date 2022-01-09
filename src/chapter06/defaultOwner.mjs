@@ -4,9 +4,23 @@ let defaultOwner = {
 };
 
 export function getDefaultOwner() {
-    return defaultOwner;
+    return new Person(defaultOwner);
 }
 
 export function setDefaultOwner(arg) {
     defaultOwner = arg;
+}
+
+class Person {
+    constructor(data) {
+        this._lastName = data.lastName;
+        this._firstName = data.firstName;
+    }
+    get lastName() {
+        return this._lastName;
+    }
+
+    get firstName() {
+        return this._firstName;
+    }
 }

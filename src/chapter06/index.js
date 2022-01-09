@@ -20,11 +20,7 @@ printOwing(invoice);
 
 // 2,3,4절은 당연하다고 생각되어, 코드는 생략.
 
-console.log(getDefaultOwner());
+const defaultOwner = getDefaultOwner();
+console.log(defaultOwner);
 
-//set함수로 변경점을 제한함.
-setDefaultOwner({ firstname: "Tei.", lastName: "sla" });
-console.log(getDefaultOwner());
-
-
-
+console.log(defaultOwner);
