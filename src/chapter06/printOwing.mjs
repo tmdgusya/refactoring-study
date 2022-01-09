@@ -28,7 +28,7 @@ const calculateOutstanding = (invoice) => {
     /* 미해결 채무 계산 */
     let result = 0;
     for (const o of invoice.orders) {
-        outstanding += o.amount;
+        result += o.amount;
     }
     return result;
 };

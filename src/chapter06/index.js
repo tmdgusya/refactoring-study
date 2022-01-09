@@ -1,3 +1,4 @@
+import { getDefaultOwner, setDefaultOwner } from "./defaultOwner.mjs";
 import { printOwing } from "./printOwing.mjs";
 
 const invoice = {
@@ -16,3 +17,14 @@ const invoice = {
     ],
 };
 printOwing(invoice);
+
+// 2,3,4절은 당연하다고 생각되어, 코드는 생략.
+
+console.log(getDefaultOwner());
+
+//set함수로 변경점을 제한함.
+setDefaultOwner({ firstname: "Tei.", lastName: "sla" });
+console.log(getDefaultOwner());
+
+
+
