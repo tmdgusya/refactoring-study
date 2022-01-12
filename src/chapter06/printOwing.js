@@ -1,11 +1,12 @@
 export function printOwing(invoice) {
     printBanner()
-    let outstanding = calculateOutstanding(invoice)
+    const outstanding = calculateOutstanding(invoice)
     recordDueDate(invoice)
-    let text = printDetails(invoice, outstanding);
+    const text = printDetails(invoice, outstanding);
 
 
     function printDetails(invoice, outstanding) {
+        let text = ''
         text += "고객명" + invoice.customer + "\n"
         text += "채무액" + outstanding + "\n"
         text += "마감일" + invoice.dueDate.toLocaleDateString() + "\n"
@@ -23,10 +24,11 @@ export function printOwing(invoice) {
 
     function calculateOutstanding(invoice){
         /* 미해결 채무 계산한다 */
+        let result = 0;
         for (const o of invoice.orders) {
-            outstanding += o.amount;
+            result += o.amount;
         }
-        return outstanding
+        return result
     }
 
 
