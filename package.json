@@ -4,7 +4,8 @@
   "scripts": {
     "test": "jest",
     "compile": "npx tsc",
-    "ch-01": "npx tsc && npx ts-node src/chapter01/index.ts"
+    "ch-01": "npx tsc && npx ts-node src/chapter01/index.ts",
+    "ch-06": "npx tsc && npx ts-node src/chapter06/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
