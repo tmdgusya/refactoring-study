@@ -1,9 +1,9 @@
 export function printOwing(invoice) {
     let outstanding = 0;
+    printBanner()
+
     let text = ''
-    console.log("****************");
-    console.log("******채무*******");
-    console.log("****************");
+
 
     /* 미해결 채무 계산한다 */
     for (const o of invoice.orders) {
@@ -17,6 +17,18 @@ export function printOwing(invoice) {
     text += "고객명" + invoice.customer + "\n"
     text += "채무액" + outstanding + "\n"
     text += "마감일" + invoice.dueDate.toLocaleDateString() + "\n"
-    console.log(text)
+   
+    printDetails();
+
+    function printDetails() {
+     console.log(text)
+    }
+ 
+    function printBanner () {
+        console.log("****************");
+        console.log("******채무*******");
+        console.log("****************");
+    }
+    
     return text
 }
