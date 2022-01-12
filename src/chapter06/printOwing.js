@@ -1,8 +1,9 @@
 export function printOwing(invoice) {
     let outstanding = 0;
-    printBanner()
-
     let text = ''
+    
+    printBanner()
+    recordDueDate(invoice)
 
 
     /* 미해결 채무 계산한다 */
@@ -10,18 +11,15 @@ export function printOwing(invoice) {
         outstanding += o.amount;
     }
 
-    /* 마감일 기록을 기록한다 */
-    const today = new Date(); // 원본에서는 Clock.today
-    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
-    /* 세부사항을 출력한다 */
-    text += "고객명" + invoice.customer + "\n"
-    text += "채무액" + outstanding + "\n"
-    text += "마감일" + invoice.dueDate.toLocaleDateString() + "\n"
-   
-    printDetails();
+    text = printDetails(invoice, outstanding);
 
-    function printDetails() {
-     console.log(text)
+    function printDetails(invoice, outstanding) {
+        text += "고객명" + invoice.customer + "\n"
+        text += "채무액" + outstanding + "\n"
+        text += "마감일" + invoice.dueDate.toLocaleDateString() + "\n"
+
+        console.log(text)
+        return text
     }
  
     function printBanner () {
@@ -29,6 +27,11 @@ export function printOwing(invoice) {
         console.log("******채무*******");
         console.log("****************");
     }
-    
+    function recordDueDate(invoice){
+        /* 마감일 기록을 기록한다 */
+        const today = new Date(); // 원본에서는 Clock.today
+        invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+        /* 세부사항을 출력한다 */
+    }    
     return text
 }
